@@ -1,0 +1,33 @@
+Videos
+Templates
+Public
+Music
+devju
+svn
+apache-tomcat
+releases_linux.json
+snap
+fintech
+ghidra_scripts
+ghidra
+English ATS 3.pdf
+ATS 5.pdf
+prod.txt
+test.txt
+visualvm_212
+tmp.txt
+test.py
+Documents
+solutions.txt
+CLionProjects
+IdeaProjects
+minesweeper-pygame
+PycharmProjects
+Desktop
+decode_message.js
+mitm
+mitm.sh
+Pictures
+Downloads
+coding
+week01

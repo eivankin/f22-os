@@ -1,0 +1,67 @@
+// The results of the first run for 3 fork calls
+ex3---ex3
+ex3-+-ex3---ex3
+    `-ex3
+ex3-+-ex3-+-ex3---ex3
+    |     `-ex3
+    |-ex3---ex3
+    `-ex3
+// The results of the first run for 5 fork calls
+ex3---ex3
+ex3-+-ex3---ex3
+    `-ex3
+ex3-+-ex3-+-ex3---ex3
+    |     `-ex3
+    |-ex3---ex3
+    `-ex3
+ex3-+-ex3-+-ex3-+-ex3---ex3
+    |     |     `-ex3
+    |     |-ex3---ex3
+    |     `-ex3
+    |-ex3-+-ex3---ex3
+    |     `-ex3
+    |-ex3---ex3
+    `-ex3
+ex3-+-ex3-+-ex3-+-ex3-+-ex3---ex3
+    |     |     |     `-ex3
+    |     |     |-ex3---ex3
+    |     |     `-ex3
+    |     |-ex3-+-ex3---ex3
+    |     |     `-ex3
+    |     |-ex3---ex3
+    |     `-ex3
+    |-ex3-+-ex3-+-ex3---ex3
+    |     |     `-ex3
+    |     |-ex3---ex3
+    |     `-ex3
+    |-ex3-+-ex3---ex3
+    |     `-ex3
+    |-ex3---ex3
+    `-ex3
+// The difference
+7a8,31
+> ex3-+-ex3-+-ex3-+-ex3---ex3
+>     |     |     `-ex3
+>     |     |-ex3---ex3
+>     |     `-ex3
+>     |-ex3-+-ex3---ex3
+>     |     `-ex3
+>     |-ex3---ex3
+>     `-ex3
+> ex3-+-ex3-+-ex3-+-ex3-+-ex3---ex3
+>     |     |     |     `-ex3
+>     |     |     |-ex3---ex3
+>     |     |     `-ex3
+>     |     |-ex3-+-ex3---ex3
+>     |     |     `-ex3
+>     |     |-ex3---ex3
+>     |     `-ex3
+>     |-ex3-+-ex3-+-ex3---ex3
+>     |     |     `-ex3
+>     |     |-ex3---ex3
+>     |     `-ex3
+>     |-ex3-+-ex3---ex3
+>     |     `-ex3
+>     |-ex3---ex3
+>     `-ex3
+As we can see, the program generates binomial tree of processes. First three stages of growth is the same, but if number of fork iterations equals 5, the tree continues to grow.

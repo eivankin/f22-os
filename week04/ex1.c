@@ -20,6 +20,8 @@ int main() {
 
         if (secondChild) {
             printf("Second child PID: %d\n", secondChild);
+            // Since it is not specified after fork in which process we should measure time, I will use fork that created current processes as a starting moment. 
+            // So there is no need to subtract some "initial time" from return of the "clock()" function, because it is already the number of ticks since child process created after parent's "fork()" call. 
             printf("Parent of the main process PID: %d, time consumed (ms): %f\n", getppid(), toMillis(clock()));
             while (wait(NULL) > 0);
         } else {

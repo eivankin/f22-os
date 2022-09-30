@@ -1,0 +1,33 @@
+Measurements for M=1
+
+real	0m12.644s
+user	0m12.618s
+sys	0m0.004s
+
+
+Measurements for M=2
+
+real	0m4.275s
+user	0m8.483s
+sys	0m0.024s
+
+
+Measurements for M=4
+
+real	0m2.165s
+user	0m8.485s
+sys	0m0.132s
+
+
+Measurements for M=10
+
+real	0m1.339s
+user	0m11.124s
+sys	0m1.874s
+
+
+Measurements for M=100
+
+real	0m1.480s
+user	0m14.564s
+sys	0m8.809s

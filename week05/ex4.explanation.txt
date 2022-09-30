@@ -1,0 +1,4 @@
+Results of the experiment looks almost the same as the ones from the third exercise.
+However, in the final iteration (M=100) noticeably more user+sys time has passed,
+which is most likely indicates that threads spend more time waiting mutex to
+unlock due to the huge number of them compared to the number of CPU cores.

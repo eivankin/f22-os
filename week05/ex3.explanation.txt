@@ -1,0 +1,9 @@
+For the case when the number of threads equals 1, user+sys (how long the program runs on all CPU cores in total)
+time and real time are very close to be equal.
+
+But when the number of threads increases, user+sys time will be usually greater than the real time,
+because the program takes less wall clock time by utilising more CPU cores at a time
+(in other words, different threads of the same program run simultaneously).
+
+Also, I want to mention that the user+sys time will noticeably increase without a noticeable decrease in the real time
+when the number of threads exceeds the number of CPU cores (8 for my case).

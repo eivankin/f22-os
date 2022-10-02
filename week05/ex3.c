@@ -70,6 +70,7 @@ int main(int argc, char *argv[])
             return EXIT_FAILURE;
         }
         total_result += *threadResult;
+        free(threadResult);
     }
 
     printf("%d\n", total_result);

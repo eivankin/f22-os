@@ -36,7 +36,8 @@ int main(int argc, char* argv[]) {
     if (pipe != NULL) {
         while (1) {
             printf("Enter the message: ");
-            fgets(messageBuffer, MSG_SIZE, stdin);
+            if (fgets(messageBuffer, MSG_SIZE, stdin) == NULL)
+                break;
 
             for (int i = 0; i < numberOfSubscribers; ++i) {
                 fprintf(pipe, "%s", messageBuffer);
@@ -47,4 +48,5 @@ int main(int argc, char* argv[]) {
     } else {
         printf("Failed to open the pipe: %s\n", strerror(errno));
     }
+    return EXIT_SUCCESS;
 }

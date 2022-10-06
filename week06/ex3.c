@@ -69,9 +69,9 @@ void print_processes(Process *processes, int size) {
     printf("Average Waiting Time = %g\n", total_WT / size);
 }
 
-int compare_by_arrival(const void *elem1, const void *elem2) {
-    int a1 = ((Process *) elem1)->arrival_time;
-    int a2 = ((Process *) elem2)->arrival_time;
+int compare_by_arrival(const Process *elem1, const Process *elem2) {
+    int a1 = elem1->arrival_time;
+    int a2 = elem2->arrival_time;
     if (a1 > a2) return 1;
     if (a1 < a2) return -1;
     return 0;
@@ -79,30 +79,33 @@ int compare_by_arrival(const void *elem1, const void *elem2) {
 
 void robin(Process *processes, int num_of_processes, int quantum) {
     // Sort processes by arrival time
-    qsort(processes, num_of_processes, sizeof(Process), compare_by_arrival);
+    qsort(processes, num_of_processes, sizeof(Process), (__compar_fn_t) compare_by_arrival);
 
-    int current_time = 0;
+    int current_time = processes[0].arrival_time;
     int num_of_complete_processes = 0;
     while (num_of_complete_processes != num_of_processes) {
         for (int i = 0; i < num_of_processes; ++i) {
             Process *p = &processes[i];
             if (p->completion_time != UINT_MAX) {
-                // process complete
+                // process completed
                 continue;
             }
-            // Run process for the max of quantum
-            if (quantum + p->running_time < p->burst_time) {
-                // Will not be complete after quantum
-                int time_to_run = quantum;
-                current_time += time_to_run;
-                p->running_time += time_to_run;
-            } else {
-                // Complete now
-                int time_to_run = p->burst_time - p->running_time;
-                current_time += time_to_run;
-                p->running_time += time_to_run;
-                p->completion_time = current_time;
-                num_of_complete_processes++;
+            if (p->arrival_time <= current_time) {
+                // Run process for the max of quantum
+                int time_to_run;
+                if (quantum + p->running_time < p->burst_time) {
+                    // Will not be complete after quantum
+                    time_to_run = quantum;
+                    current_time += time_to_run;
+                    p->running_time += time_to_run;
+                } else {
+                    // Complete now
+                    time_to_run = p->burst_time - p->running_time;
+                    current_time += time_to_run;
+                    p->running_time += time_to_run;
+                    p->completion_time = current_time;
+                    num_of_complete_processes++;
+                }
             }
             // Go to next process in queue
         }
@@ -112,7 +115,7 @@ void robin(Process *processes, int num_of_processes, int quantum) {
 
 int main() {
     unsigned num_of_processes, quantum;
-    printf("Enter the quantum: \n");
+    printf("Enter the quantum: ");
     input_number(&quantum);
     printf("Enter the number of processes: ");
     input_number(&num_of_processes);
@@ -120,6 +123,7 @@ int main() {
     for (int i = 0; i < num_of_processes; ++i) {
         read_process_data(&processes[i], i);
         processes[i].completion_time = UINT_MAX;
+        processes[i].running_time = 0;
     }
     robin(processes, num_of_processes, quantum);
     print_processes(processes, num_of_processes);

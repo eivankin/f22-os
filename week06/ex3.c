@@ -83,6 +83,7 @@ void robin(Process *processes, int num_of_processes, int quantum) {
 
     int current_time = processes[0].arrival_time;
     int num_of_complete_processes = 0;
+    int skip_flag = 0;
     while (num_of_complete_processes != num_of_processes) {
         for (int i = 0; i < num_of_processes; ++i) {
             Process *p = &processes[i];
@@ -90,9 +91,11 @@ void robin(Process *processes, int num_of_processes, int quantum) {
                 // process completed
                 continue;
             }
-            if (p->arrival_time <= current_time) {
+            int time_to_run = 0;
+            if (p->arrival_time <= current_time ||
+                // if there are no processes arrived yet, then skip to the next
+                (skip_flag && (current_time = p->arrival_time) != 0)) {
                 // Run process for the max of quantum
-                int time_to_run;
                 if (quantum + p->running_time < p->burst_time) {
                     // Will not be complete after quantum
                     time_to_run = quantum;
@@ -106,6 +109,11 @@ void robin(Process *processes, int num_of_processes, int quantum) {
                     p->completion_time = current_time;
                     num_of_complete_processes++;
                 }
+            }
+            if (time_to_run == 0) {
+                skip_flag = 1;
+            } else {
+                skip_flag = 0;
             }
             // Go to next process in queue
         }

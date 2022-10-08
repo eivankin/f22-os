@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 
 #define COL_WIDTH 10
 #define NUM_OF_HEADERS 6
@@ -83,17 +84,24 @@ void sjf(Process *processes, int num_of_processes) {
     // Sort processes by arrival time, and then by burst time
     qsort(processes, num_of_processes, sizeof(Process), compare_by_arrival_then_burst);
 
-    int current_time = 0;
+
+    int current_time = processes[0].arrival_time;
     for (int i = 0; i < num_of_processes; ++i) {
-        Process *p = &processes[i];
-        if (p->arrival_time > current_time) {
-            // Wait for process to arrive
-            current_time = p->arrival_time;
+        Process *shortestAmongArrived = NULL;
+        for (int j = 0; j < num_of_processes; ++j) {
+            if (processes[j].completion_time == UINT_MAX && // if not yet completed
+                (processes[j].arrival_time <= current_time || // and already arrived
+                    (shortestAmongArrived == NULL && (current_time = processes[j].arrival_time) != 0)) && // or there is a pause
+                (shortestAmongArrived == NULL || processes[j].burst_time < shortestAmongArrived->burst_time))
+                shortestAmongArrived = &processes[j];
         }
-        // Run process
-        current_time += p->burst_time;
-        p->completion_time = current_time;
-        // Go to next process in queue
+        if (shortestAmongArrived != NULL) {
+            current_time += shortestAmongArrived->burst_time;
+            shortestAmongArrived->completion_time = current_time;
+        } else {
+            printf("Error: next process to schedule not found.");
+            exit(EXIT_FAILURE);
+        }
     }
 }
 
@@ -104,6 +112,7 @@ int main() {
     Process *processes = malloc(sizeof(Process) * num_of_processes);
     for (int i = 0; i < num_of_processes; ++i) {
         read_process_data(&processes[i], i);
+        processes[i].completion_time = UINT_MAX;
     }
     sjf(processes, num_of_processes);
     print_processes(processes, num_of_processes);

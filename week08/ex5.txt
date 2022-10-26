@@ -1,0 +1,6 @@
+Virtual address points to virtual memory, which is a virtual main memory of machine.
+Programs work with virtual addresses, and they have range of virtual address space available to them.
+
+Physical address refers to real address on a RAM,
+so internally computer translates virtual addresses to physical ones and make requests to disk.
+Mapping between physical and virtual address is dynamic and usually made using idea of pages.

@@ -1,0 +1,17 @@
+-rw-r--r-- 644
+-rwxr--rwx 747
+-rwxrwxrwx 777
+
+660 means
+read and write rights to owner (110),
+read and write rights to group (110),
+no rights to others (000)
+
+775 means
+read, write and execute rights to owner (111),
+read, write and execute rights to group (111),
+read and execute rights to others (101)
+
+777 means
+read, write and execute rights to for owner, group and others (111)
+

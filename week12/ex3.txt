@@ -1,0 +1,14 @@
+Shortcuts:
+P+E:    'I passed the Exam!'
+C+A+P:  'Get some cappuccino!'
+R+N+D:  'Your random number is: 42'
+I passed the Exam!
+I passed the Exam!
+Get some cappuccino!
+Your random number is: 42
+Your random number is: 42
+Your random number is: 42
+I passed the Exam!
+I passed the Exam!
+Get some cappuccino!
+Get some cappuccino!

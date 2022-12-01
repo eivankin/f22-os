@@ -76,7 +76,6 @@ int main() {
     }
 
     R = matrix(num_proc);
-    read_line; // skip empty line
     for (size_t i = 0; i < num_proc; ++i) {
         read_line;
         R[i] = vector(num_res);

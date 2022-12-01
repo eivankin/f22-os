@@ -1,0 +1,10 @@
+Deadlock recovery might be a better strategy when the chance of deadlock is low, because this strategy requires
+additional resources (for example, to store checkpoints for rollback purpose) or potentially harmful actions
+(for example, killing process or snatching resource from it).
+
+Deadlock prevention might be a better strategy when resource can be used by more than one process
+(for example, resource has its own job queue) or there is a high probability of deadlocks so preventing
+mutual exclusion, hold and wait, no preemption or circular wait worth it.
+
+Deadlock avoidance might be a better strategy when it is possible to review each resource allocation so that the
+allocation does not cause the deadlock.

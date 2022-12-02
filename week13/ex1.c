@@ -75,6 +75,19 @@ int main() {
         read_line;
     }
 
+    // Check that every instance of each resource type in existence is either allocated or free/available
+    for (size_t i = 0; i < num_res; ++i) {
+        size_t allocated = 0;
+        for (size_t j = 0; j < num_proc; ++j) {
+            allocated += C[j][i];
+        }
+        if (allocated + A[i] != E[i]) {
+            printf("Sum of allocated and available instances does not match with "
+                   "the number of existing ones for resource #%lu\n", i + 1);
+            return EXIT_FAILURE;
+        }
+    }
+
     R = matrix(num_proc);
     for (size_t i = 0; i < num_proc; ++i) {
         read_line;
@@ -96,7 +109,15 @@ int main() {
         }
     }
     if (num_finished < num_proc) {
-        printf("%lu processes are deadlocked\n", num_proc - num_finished);
+        size_t num_deadlocked = num_proc - num_finished;
+        for (size_t i = 0; i < num_proc; ++i) {
+            printf("P%lu", i + 1);
+            --num_deadlocked;
+            if (num_deadlocked > 0) {
+                printf(", ");
+            }
+        }
+        printf(" are deadlocked.\n");
     } else {
         printf("No deadlock is detected\n");
     }

@@ -111,10 +111,12 @@ int main() {
     if (num_finished < num_proc) {
         size_t num_deadlocked = num_proc - num_finished;
         for (size_t i = 0; i < num_proc; ++i) {
-            printf("P%lu", i + 1);
-            --num_deadlocked;
-            if (num_deadlocked > 0) {
-                printf(", ");
+            if (!finished[i]) {
+                printf("P%lu", i + 1);
+                --num_deadlocked;
+                if (num_deadlocked > 0) {
+                    printf(", ");
+                }
             }
         }
         printf(" are deadlocked.\n");
